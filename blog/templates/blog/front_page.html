@@ -1,0 +1,24 @@
+{% extends 'blog_app/landing_page.html'%}
+{% load hashid_filters %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% for blog in blog_posts %}
+            <div class="col-md-6 mb-5">
+
+                <img src="{{ blog.image.url }}" class="card-img-top" alt="{{ blog.title }}">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ blog.title }}</h5>
+                        <p class="card-text">{{ blog.content }}</p>
+                        <p class="card-text"><small class="text-muted">{{ blog.created }}</small></p>
+                        <div class="author-info">
+                            <span class="author-name">Published by {{ blog.auther.username }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

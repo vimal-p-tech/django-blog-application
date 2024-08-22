@@ -1,0 +1,43 @@
+{% extends 'blog_app/base.html' %}
+{% block content %}
+<div class="form_container p-5 bg-light row d-flex justify-content-center align-items-center">
+    <table class="table table-striped">
+        <tbody>
+            <tr>
+                {% for key,value in headers.items %}
+                    <th>{{value}}</th>
+                {%endfor%}
+            </tr>
+            {% for data in table_data  %}
+                <tr>
+                    {% for key,value in data.items %}
+                        <td>{{value}}</td>
+                        {% if forloop.last %}
+                            {% if actions %}
+                                <td>
+                                 
+                                    <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                                        <div class="btn-group mr-2" role="group" aria-label="First group">
+                                            {% for key,value in actions.items %}
+                                        
+                                                {% with action=value %}
+                                                    <form method='POST' action="{% url 'blog:blog_delete' data.id %}">
+                                                        {% csrf_token %}
+                                                        <button type="submit" class="{{action.class}}"><span class="bi-trash"></span> </button>
+                                                    </form>
+                                                {% endwith %}
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                </td>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+        
+        
+    </table>
+</div>
+{% endblock %}

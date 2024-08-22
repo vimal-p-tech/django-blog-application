@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+*.pyo
+*.sqlite3
+media/
+base-compose.yml
+project-compose.yml
+Dockerfile

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blog Page</title>
+    <script src="https://cdn.socket.io/4.7.5/socket.io.min.js" integrity="sha384-2huaZvOR9iDzHqslqwpR87isEmrfxqyWOF7hr7BY6KG0+hVKLoEXMPUJw3ynWuhO" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id="blog-content"></div>
+    <h1>Client IP Address: {{ request.META.HTTP_USER_AGENT }}</h1>
+
+
+</body>
+<script>
+    const socket = io('http://localhost:3000'); // Connect to Node.js server
+    socket.on('connect', () => {
+        alert('Connected to Socket.io server');
+    });
+    // socket.on('blogData', (data) => {
+    //     document.getElementById('blog-content').innerHTML = data;
+    // });
+</script>
+</html>

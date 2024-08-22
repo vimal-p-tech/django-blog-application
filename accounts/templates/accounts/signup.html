@@ -1,0 +1,46 @@
+{%extends 'blog_app/landing_page.html'%}
+
+{% block content %}
+
+
+<div class="form_container card p-5 row d-flex justify-content-center align-items-center">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+                <div class="toast-header">
+                    <strong class="mr-auto">Registration Status</strong>
+                </div>
+                <div class="toast-body">
+                    {{ message }}
+                </div>
+            </div>
+        {% endfor %}
+    {% endif %}
+    <form method="{{form.method}}" action="{{form.action}}" class="col-sm-6 card-body bg-light">
+        {% csrf_token %}
+            {% for field in form %}
+                <div class="form-group p-2">
+                    <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                    {{ field }}
+                    {% if field.errors %}
+                    {% for error in field.errors %}
+                        <div class="alert alert-danger">
+                            <strong>{{ error|escape }}</strong>
+                        </div>
+                    {% endfor %}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        <div class="buttons d-flex justify-content-center align-items-center">
+            <button type="submit" class="btn btn-primary">Sign Up</button>
+        </div>
+    </form>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var toasts = document.querySelectorAll('.toast');
+        var toast = new bootstrap.Toast(toasts[0]);
+        toast.show();
+    });
+</script>
+{% endblock %}

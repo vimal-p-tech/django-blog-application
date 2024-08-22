@@ -1,0 +1,61 @@
+{% extends 'blog_app/base.html'%}
+{% load static %}
+{% block js %}
+<script src="{% static 'js/frontend/blog_edit_modal.js' %}"></script>
+{% endblock js %}
+  
+{% block content %}
+<div class="container">
+    <table class="table table-striped mt-3"> 
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Content</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for blog in blogs %}
+              <tr>
+                  <td>{{ blog.title }}</td>
+                  <td>{{ blog.content }}</td>
+                  <td>
+                    
+                    
+                      <div class="btn-group" role="group" aria-label="First group">
+                        <button type="button" class="btn btn-primary edit-button" onclick="open_blog_edit_modal(event,'{{blog.id}}')" blog_edit_url="{% url 'blog:edit_form' blog.id %}">Update</button>
+                        <form method="POST" action="{% url 'blog:blog_delete' blog.id %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                    
+
+                  </td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      
+      <div class="modal-body">
+      </div>
+      
+    </div>
+  </div>
+</div>
+<style>
+  
+</style>
+
+{% endblock %}

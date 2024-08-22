@@ -1,0 +1,27 @@
+
+<............................................................................>
+
+#rendering form in modal through ajax.
+# editing purpose
+
+$(document).ready(function() {
+    $('.edit-button').on('click', function(e) {
+        e.preventDefault()
+        $.ajax({
+            url: "{% url 'blog:edit_form' %}",
+            type: 'GET',
+            headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': '{{csrftoken}}',
+            },
+            success: function(response){
+                $('.modal-body').html(response.html_content);
+                $('#exampleModal').modal('show');
+            },
+            error: function(xhr, status, error) {
+                console.error('Error fetching edit form: ' + error);
+            }
+        });
+    });
+});
+<............................................................................>
