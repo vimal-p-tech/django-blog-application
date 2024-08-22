@@ -13,7 +13,7 @@ Welcome to the Django Blog App! This application is designed to provide a simple
 
 ## Technologies Used
 - **Django**: A high-level Python web framework that encourages rapid development.
-- **Postgres**: A lightweight database for development and testing.
+- **Postgres**: A powerful database for development and testing.
 - **Bootstrap**: For responsive front-end design.
 - **Jquery**: For AJAX forms.
 - **HTML/CSS**: For structuring and styling the web pages.
