@@ -1,0 +1,31 @@
+{%extends 'blog_app/landing_page.html'%}
+{% load static %}
+{% block content %}
+<div class="form-container p-5 bg-light col-md-6">
+    <div class="form-head" style="text-align:center;">
+        <img class="img-thumbnail mb-2" src="{% static 'images/login-icon-vector.jpg' %}"  style="width:100px;height:100px;" alt="Logo" class="login-logo">
+    </div>
+    <div class="form-body">
+        <form method="{{form.method}}" class="bg-white p-3">
+            {% csrf_token %}
+                {% for field in form %}
+                    <div class="form-group p-2">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field }}
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <div class="alert alert-danger">
+                                    <strong>{{ error|escape }}</strong>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            <div class="buttons d-flex justify-content-center align-items-center">
+                <button type="submit" class="btn btn-primary">Login</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+<!-- code-generator?id=d43d9c49-cc5f-4491-a171-379b84752d00 -->

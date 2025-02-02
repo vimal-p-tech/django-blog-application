@@ -1,0 +1,18 @@
+{%extends 'blog_app/base.html' %}
+{% load hashid_filters %}
+{% block content %}
+    <div class="blogs row mt-5">
+        {% for blog in blogs %}
+            <div class="col-md-6 mb-3">
+                <div class="card">
+                    <img src="{{ blog.image.url }}" class="card-img-top img-fluid" style="height: 300px;" alt="{{ blog.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'blog:blog_detail' blog.pk|hashid_encode:blog.title %}">{{ blog.title }}</a></h5>
+                        <p class="card-text">{{ blog.content|truncatewords:20 }}</p>
+                        <a href="#" class="btn btn-primary">Read More</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
